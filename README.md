@@ -6,7 +6,7 @@ This project is an expert system that evaluates loan approval criteria based on 
 ## Frontend Form
 The loan approval application form allows users to input their details for loan approval evaluation.
 
-![Loan Approval Application Form](./images/loan_approval_form.png)
+![Loan Approval Application Form](./images/https://ibb.co/rd2CB4T)
 
 ## Running the Prolog Expert System
 
