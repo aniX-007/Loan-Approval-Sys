@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval System</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Loan Approval Application</h2>
+        <form id="loanForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" required>
+            </div>
+            <div class="form-group">
+                <label for="income">Income:</label>
+                <input type="number" id="income" required>
+            </div>
+            <div class="form-group">
+                <label for="creditScore">Credit Score:</label>
+                <input type="number" id="creditScore" required>
+            </div>
+            <div class="form-group">
+                <label for="employmentStatus">Employment Status:</label>
+                <select id="employmentStatus" required>
+                    <option value="employed">Employed</option>
+                    <option value="unemployed">Unemployed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="existingDebt">Existing Debt:</label>
+                <input type="number" id="existingDebt" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById("loanForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById("name").value,
+                age: parseInt(document.getElementById("age").value),
+                income: parseInt(document.getElementById("income").value),
+                creditScore: parseInt(document.getElementById("creditScore").value),
+                employmentStatus: document.getElementById("employmentStatus").value,
+                existingDebt: parseInt(document.getElementById("existingDebt").value)
+            };
+
+            // Send form data to the backend
+            const response = await fetch('/check-loan-approval', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            // Display the result
+            const result = await response.text();
+            document.getElementById("result").innerText = result;
+        });
+    </script>
+</body>
+</html>
